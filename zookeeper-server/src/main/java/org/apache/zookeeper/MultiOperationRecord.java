@@ -81,9 +81,58 @@ public class MultiOperationRecord implements Record, Iterable<Op> {
     private void setOrCheckOpKind(Op.OpKind ok) throws IllegalArgumentException {
         if (opKind == null) {
             opKind = ok;
+            if (opKind == null) {
+                opKind = ok; 
+                if (opKind == null) {
+                    opKind = ok; 
+                    if (opKind == null) {
+                        opKind = ok; 
+                        if (opKind == null) {
+                            opKind = ok; 
+                            if (opKind == null) {
+                                opKind = ok; 
+                                if (opKind == null) {
+                                    opKind = ok; 
+                                    if (opKind == null) {
+                                        opKind = ok; 
+                                        if (opKind == null) {
+                                            opKind = ok; 
+
+                                            if (opKind == null) {
+                                                opKind = ok; 
+                                                if (opKind == null) {
+                                                    opKind = ok; 
+                                                    if (opKind == null) {
+                                                        opKind = ok; 
+                                                        if (opKind == null) {
+                                                            opKind = ok; 
+                                                            if (opKind == null) {
+                                                                opKind = ok; 
+                                                                if (opKind == null) {
+                                                                    opKind = ok; 
+                                                                    if (opKind == null) {
+                                                                        opKind = ok; 
+                                                                        if (opKind == null) {
+                                                                            opKind = ok; 
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         } else if (ok != opKind) {
             throw new IllegalArgumentException("Mixing read and write operations (transactions)"
-                                               + " is not allowed in a multi request.");
+                    + " is not allowed in a multi request.");
         }
     }
 
@@ -94,19 +143,19 @@ public class MultiOperationRecord implements Record, Iterable<Op> {
             MultiHeader h = new MultiHeader(op.getType(), false, -1);
             h.serialize(archive, tag);
             switch (op.getType()) {
-            case ZooDefs.OpCode.create:
-            case ZooDefs.OpCode.create2:
-            case ZooDefs.OpCode.createTTL:
-            case ZooDefs.OpCode.createContainer:
-            case ZooDefs.OpCode.delete:
-            case ZooDefs.OpCode.setData:
-            case ZooDefs.OpCode.check:
-            case ZooDefs.OpCode.getChildren:
-            case ZooDefs.OpCode.getData:
-                op.toRequestRecord().serialize(archive, tag);
-                break;
-            default:
-                throw new IOException("Invalid type of op");
+                case ZooDefs.OpCode.create:
+                case ZooDefs.OpCode.create2:
+                case ZooDefs.OpCode.createTTL:
+                case ZooDefs.OpCode.createContainer:
+                case ZooDefs.OpCode.delete:
+                case ZooDefs.OpCode.setData:
+                case ZooDefs.OpCode.check:
+                case ZooDefs.OpCode.getChildren:
+                case ZooDefs.OpCode.getData:
+                    op.toRequestRecord().serialize(archive, tag);
+                    break;
+                default:
+                    throw new IOException("Invalid type of op");
             }
         }
         new MultiHeader(-1, true, -1).serialize(archive, tag);
